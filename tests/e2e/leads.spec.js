@@ -1,8 +1,8 @@
 // @ts-check
 import { test } from '@playwright/test'
-const { LandingPage } = require('./pages/LandingPage.js')
+const { LandingPage } = require('../pages/LandingPage.js')
 
-/** @type {import('./pages/LandingPage.js').LandingPage} */
+/** @type {import('../pages/LandingPage.js').LandingPage} */
 let landingPage
 
 test.beforeEach(async ({ page }) => {
