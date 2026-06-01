@@ -1,7 +1,8 @@
-import { expect } from '@playwright/test';
+import { test, expect } from '@playwright/test';
 
 export class LoginingPage {
-
+  
+    /** @param {import('@playwright/test').Page} page */
     constructor(page) {
     this.page = page;
     this.url = 'http://localhost:3000/admin/login';
@@ -10,6 +11,22 @@ export class LoginingPage {
  
   async visit() {
     await this.page.goto(this.url);
+    
+    const loginform = this.page.locator('.login-form')
+    await expect(loginform).toBeVisible()
+  }
+
+  async submit(email,senha){
+    await this.page.getByPlaceholder('E-mail').fill(email)
+    await this.page.getByPlaceholder('Senha').fill(senha)
+
+    await this.page.locator('//button[text()="Entrar"]').click()
+  }
+
+  async isLoggedIn(){
+    //Espera os dados da tela carrega e em seguida verifica a url se possui admin
+    await this.page.waitForLoadState('networkidle')
+    await expect(this.page).toHaveURL(/.*admin/)
   }
 
 }
