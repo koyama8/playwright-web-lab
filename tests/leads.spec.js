@@ -1,104 +1,56 @@
 // @ts-check
 import { test, expect} from '@playwright/test';
+const {LandingPage} = require('./pages/LandingPage.js')
 
 test('deve cadastrar um lead na fila de espera', async ({ page }) => {
-  await page.goto('http://localhost:3000');
+  const landingPage = new LandingPage(page)
+  await landingPage.visit()
+  await landingPage.openLeadModel()
+  await landingPage.submitLeadForm('Matheus', 'qalab@hotmail.com')
 
-  //await page.click('//button[text()="Aperte o play... se tiver coragem"]')  
-  await page.getByRole('button', {name: 'Aperte o play... se tiver coragem'}).click()
-
-  //checkpoint verificar se esta na tela certa
-  await expect(
-    page.getByTestId('modal').getByRole('heading')
-   ).toHaveText('Fila de espera')
-
-  await page.locator('input[name="name"]').fill('Matheus')
-  await page.getByPlaceholder('Informe seu email').fill('qalab@hotmail.com')
-
-  await page.getByTestId('modal')
-       .getByText('Quero entrar na fila!').click()
-       
   const msg = 'Agradecemos por compartilhar seus dados conosco. Em breve, nossa equipe entrará em contato!'
-
-  await expect(page.locator('.toast')
-       ).toHaveText(msg )
-
-  await page.waitForTimeout(3000);
+  await landingPage.toasHaveText(msg)
 
 });
 
 
-test('nao deve cadastrar quando o nome não é preenchido', async ({ page }) => {
-  await page.goto('http://localhost:3000');
+test('nao deve cadastrar quando o email é incorreto', async ({ page }) => {
+  const landingPage = new LandingPage(page)
+  await landingPage.visit()
+  await landingPage.openLeadModel()
+  await landingPage.submitLeadForm('Matheus', 'qalab.com')
 
-  //await page.click('//button[text()="Aperte o play... se tiver coragem"]')  
-  await page.getByRole('button', {name: 'Aperte o play... se tiver coragem'}).click()
-
-  //checkpoint verificar se esta na tela certa
-  await expect(
-    page.getByTestId('modal').getByRole('heading')
-   ).toHaveText('Fila de espera')
-
+  await landingPage.alertHaveText('Email incorreto');
   
-  await page.locator('input[name="name"]').fill('Matheus')
-  await page.getByPlaceholder('Informe seu email').fill('qalab.com.br')
-  
-  await page.getByTestId('modal')
-       .getByText('Quero entrar na fila!').click()
 
 });
 
-test('nao deve cadastrar email incorreto', async ({ page }) => {
-  await page.goto('http://localhost:3000');
-
-  //await page.click('//button[text()="Aperte o play... se tiver coragem"]')  
-  await page.getByRole('button', {name: 'Aperte o play... se tiver coragem'}).click()
-
-  //checkpoint verificar se esta na tela certa
-  await expect(
-    page.getByTestId('modal').getByRole('heading')
-   ).toHaveText('Fila de espera')
-
-  await page.locator('input[name="email"]').fill('qalab@hotmail.com')
-
-  await page.getByTestId('modal').getByText('Quero entrar na fila!').click()
+test('nao deve cadastrar quando o nome não é preenchido incorreto', async ({ page }) => {
+  const landingPage = new LandingPage(page)
+  await landingPage.visit()
+  await landingPage.openLeadModel()
+  await landingPage.submitLeadForm('', 'qalab@hotmail.com')
 
   await expect(page.locator('.alert')).toHaveText('Campo obrigatório')
 });
 
 test('nao deve cadastrar quando o email não é preenchido', async ({ page }) => {
-  await page.goto('http://localhost:3000');
+  const landingPage = new LandingPage(page)
+  await landingPage.visit()
+  await landingPage.openLeadModel()
+  await landingPage.submitLeadForm('Matheus', '')
 
-  //await page.click('//button[text()="Aperte o play... se tiver coragem"]')  
-  await page.getByRole('button', {name: 'Aperte o play... se tiver coragem'}).click()
-
-  //checkpoint verificar se esta na tela certa
-  await expect(
-    page.getByTestId('modal').getByRole('heading')
-   ).toHaveText('Fila de espera')
-
-   await page.locator('input[name="name"]').fill('matheus')
-
-   await page.getByRole('button', {name: 'Quero entrar na fila!'}).click()
-   await expect(page.locator('.alert')).toHaveText('Campo obrigatório')
+  await landingPage.alertHaveText('Campo obrigatório');
 });
 
 test('nao deve cadastrar quando o nome e email não é preenchido', async ({ page }) => {
-  await page.goto('http://localhost:3000');
+  const landingPage = new LandingPage(page)
+  await landingPage.visit()
+  await landingPage.openLeadModel()
+  await landingPage.submitLeadForm('', '')
 
-  //await page.click('//button[text()="Aperte o play... se tiver coragem"]')  
-  await page.getByRole('button', {name: 'Aperte o play... se tiver coragem'}).click()
-
-  //checkpoint verificar se esta na tela certa
-  await expect(
-    page.getByTestId('modal').getByRole('heading')
-   ).toHaveText('Fila de espera')
-
-
-   await page.getByRole('button', {name: 'Quero entrar na fila!'}).click()
-   
-   await expect(page.locator('.alert')).toHaveText([
+   await landingPage.alertHaveText([
     'Campo obrigatório',
     'Campo obrigatório'
-   ])
+   ]);
 });
