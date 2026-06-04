@@ -32,13 +32,7 @@ export class LandingPage {
     await this.emailInput.fill(email);
     await this.submitLeadButton.click();
   }
-
-  async toasHaveText(msg) {
-    await expect(this.toast).toHaveText(msg);
-
-    await this.page.waitForTimeout(3000);
-  }
-
+  
   async alertHaveText(target) {
     await expect(this.alert).toHaveText(target);
   }

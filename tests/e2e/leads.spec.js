@@ -1,12 +1,18 @@
 // @ts-check
 import { test } from '@playwright/test'
 const { LandingPage } = require('../pages/LandingPage.js')
+const { Toast } = require('../pages/Components.js')
+
 
 /** @type {import('../pages/LandingPage.js').LandingPage} */
 let landingPage
 
+/** @type {import('../pages/Components.js').Toast} */
+let toast
+
 test.beforeEach(async ({ page }) => {
   landingPage = new LandingPage(page)
+  toast = new Toast(page)
   await landingPage.visit()
   await landingPage.openLeadModel()
 })
@@ -15,7 +21,7 @@ test('deve cadastrar um lead na fila de espera', async () => {
   await landingPage.submitLeadForm('Matheus', 'qalab@hotmail.com')
 
   const msg = 'Agradecemos por compartilhar seus dados conosco. Em breve, nossa equipe entrará em contato!'
-  await landingPage.toasHaveText(msg)
+  await toast.toasHaveText(msg)
 })
 
 test('nao deve cadastrar quando o email e incorreto', async () => {
