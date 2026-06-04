@@ -1,16 +1,16 @@
 {
-  "night_of_the_living_dead": {
+  "create": {
     "title": "Night of the Living Dead",
     "overview": "Sobreviventes se refugiam em uma casa isolada enquanto mortos-vivos começam a tomar conta da região.",
-    "company": "Continental Distributing",
-    "release_year": 1968,
+    "company": "Netflix",
+    "release_year": 1970,
     "featured": false,
     "cover": "/images/movies/night-of-the-living-dead.png"
   },
   "dawn_of_the_dead": {
     "title": "Dawn of the Dead",
     "overview": "Durante o colapso da sociedade causado por uma epidemia zumbi, um grupo tenta sobreviver escondido em um shopping center.",
-    "company": "United Film Distribution Company",
+    "company": "Warner Bros. Pictures",
     "release_year": 1978,
     "featured": false,
     "cover": "/images/movies/dawn-of-the-dead.png"
@@ -18,7 +18,7 @@
   "the_return_of_the_living_dead": {
     "title": "The Return of the Living Dead",
     "overview": "Um vazamento acidental libera mortos-vivos famintos por cérebros e mergulha uma pequena cidade no caos.",
-    "company": "Orion Pictures",
+    "company": "Columbia Pictures",
     "release_year": 1985,
     "featured": false,
     "cover": "/images/movies/the-return-of-the-living-dead.png"
@@ -26,7 +26,7 @@
   "twenty_eight_days_later": {
     "title": "28 Days Later",
     "overview": "Após acordar de um coma, um homem encontra Londres devastada por um vírus que transforma pessoas em criaturas violentas.",
-    "company": "Fox Searchlight Pictures",
+    "company": "Fox Entertainment",
     "release_year": 2002,
     "featured": false,
     "cover": "/images/movies/28-days-later.png"
@@ -34,10 +34,10 @@
   "resident_evil": {
     "title": "Resident Evil",
     "overview": "Uma equipe entra em um laboratório subterrâneo após o vazamento de um vírus mortal que reanima os mortos.",
-    "company": "Screen Gems",
+    "company": "Sony Pictures",
     "release_year": 2002,
     "featured": false,
-    "cover": "/images/movies/resident-evil.png"
+    "cover": "/images/movies/resident-eivil.png"
   },
   "shaun_of_the_dead": {
     "title": "Shaun of the Dead",
@@ -50,7 +50,7 @@
   "rec": {
     "title": "[REC]",
     "overview": "Uma repórter acompanha bombeiros em um prédio residencial e acaba presa em meio a um surto aterrorizante.",
-    "company": "Filmax",
+    "company": "Lionsgate Films",
     "release_year": 2007,
     "featured": false,
     "cover": "/images/movies/rec.png"
@@ -58,7 +58,7 @@
   "zombieland": {
     "title": "Zombieland",
     "overview": "Quatro sobreviventes atravessam os Estados Unidos tentando se manter vivos em um mundo dominado por zumbis.",
-    "company": "Sony Pictures Releasing",
+    "company": "Sony Pictures",
     "release_year": 2009,
     "featured": false,
     "cover": "/images/movies/zombieland.png"
@@ -74,7 +74,7 @@
   "train_to_busan": {
     "title": "Train to Busan",
     "overview": "Passageiros de um trem de alta velocidade lutam para sobreviver quando um surto zumbi se espalha pela Coreia do Sul.",
-    "company": "Next Entertainment World",
+    "company": "Amazon Studios",
     "release_year": 2016,
     "featured": false,
     "cover": "/images/movies/train-to-busan.png"

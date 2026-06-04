@@ -1,5 +1,7 @@
 const { test } = require('@playwright/test')
 
+const data = require('../support/fixtures/movies.json')
+
 const { LoginingPage } = require('../pages/LoginPage.js')
 const { Moviespage } = require('../pages/Moviespage.js')
 const { Toast } = require('../pages/Components.js')
@@ -18,8 +20,12 @@ test.beforeEach(async ({ page }) => {
 })
  
 test('deve poder cadastrar um novo filme', async({page}) => {
+    
+    const movie = data.create
+
     await loginingPage.submit('admin@zombieplus.com','pwd123')
     await moviespage.isLoggedIn()
 
-    await moviespage.create('Nome do filme','Sinopse do filme', 'Fox Entertainment', '1972')
+    await moviespage.create(movie.title, movie.overview, movie.company, movie.release_year)
+    
 })
