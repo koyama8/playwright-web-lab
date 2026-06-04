@@ -22,13 +22,6 @@ export class LoginingPage {
 
     await this.page.locator('//button[text()="Entrar"]').click()
   }
-
-  async isLoggedIn(){
-    //Espera os dados da tela carrega e em seguida verifica a url se possui admin
-    await this.page.waitForLoadState('networkidle')
-    await expect(this.page).toHaveURL(/.*admin/)
-  }
-
   async alertHaveText(text){
     const alert = this.page.locator('span[class$=alert]')
     await expect(alert).toHaveText(text)
