@@ -20,15 +20,34 @@ test.beforeEach(async ({ page }) => {
 })
 
 test('deve cadastrar um lead na fila de espera', async () => {
-
   const leadName = faker.person.fullName()
   const leadEmail = faker.internet.email()
 
+  await landingPage.visit()
+  await landingPage.openLeadModel()
   await landingPage.submitLeadForm(leadName, leadEmail)
 
   const msg = 'Agradecemos por compartilhar seus dados conosco. Em breve, nossa equipe entrará em contato!'
   await toast.toasHaveText(msg)
 })
+
+test('não deve cadastrar quando o email ja existe', async () => {
+  const leadName = faker.person.fullName()
+  const leadEmail = faker.internet.email()
+  
+  await landingPage.visit()
+  await landingPage.openLeadModel()
+  await landingPage.submitLeadForm(leadName, leadEmail)
+
+  await landingPage.visit()
+  await landingPage.openLeadModel()
+  await landingPage.submitLeadForm(leadName, leadEmail)
+
+
+  const msg = 'O endereço de e-mail fornecido já está registrado em nossa fila de espera.'
+  await toast.toasHaveText(msg)
+})
+
 
 test('nao deve cadastrar quando o email e incorreto', async () => {
   await landingPage.submitLeadForm('Matheus', 'qalab.com')
