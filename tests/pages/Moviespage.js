@@ -20,9 +20,24 @@ export class Moviespage {
         await expect(this.page).toHaveURL(/.*admin/)
       }
 
-     async create(title,overview,company,release_year){
-      // Seletor com reger o mesmo que a[href="/admin/movies/register"]
+     async goForm(){
+        // Seletor com reger o mesmo que a[href="/admin/movies/register"]
        await this.page.locator('a[href$="register"]').click()
+     }
+
+     async submit(){      
+       await this.page.getByRole('button', {name: 'Cadastrar'})
+                 .click()
+     }
+
+     async toHaveText(text){
+      
+      await expect(this.page.locator('.alert')).toHaveText(text)
+     }
+
+     async create(title,overview,company,release_year){
+
+       await this.goForm()
 
        await this.page.getByLabel('Titulo do filme').fill(title)
        await this.page.getByLabel('Sinopse').fill(overview)
@@ -37,9 +52,8 @@ export class Moviespage {
       
        await this.page.locator('.react-select__option').filter({hasText: release_year})
                  .click()
-       
-       await this.page.getByRole('button', {name: 'Cadastrar'})
-                 .click()
+ 
+       await this.submit()
      }
     
 }
