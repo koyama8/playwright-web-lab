@@ -16,7 +16,7 @@ test.beforeEach(async ({ page }) => {
 
 test('deve logar com administrador', async () => {
    await loginingPage.submit('admin@zombieplus.com','pwd123')
-   await loginingPage.isLoggedIn()
+   await loginingPage.isLoggedIn('Admin')
 })
 
 test('não deve logar com senha incorreta', async () => {

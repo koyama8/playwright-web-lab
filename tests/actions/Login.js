@@ -8,6 +8,12 @@ export class Login {
     this.url = 'http://localhost:3000/admin/login';
   }
 
+
+  async do(email, password, username){
+    await this.visit()
+    await this.submit(email,password)
+    await this.isLoggedIn(username)
+  }
  
   async visit() {
     await this.page.goto(this.url);
@@ -32,11 +38,11 @@ export class Login {
     await expect(alert).toHaveText(text)
   }
 
-  async isLoggedIn(){
-    //Espera os dados da tela carrega e em seguida verifica a url se possui admin
-    await this.page.waitForLoadState('networkidle')
-    await expect(this.page).toHaveURL(/.*admin/)
-      }
+  async isLoggedIn(username){
+    const loggedUser = this.page.locator('.logged-user')
+    await expect(loggedUser).toHaveText(`Olá, ${username}`)      
+  }
+
 
 
 }
