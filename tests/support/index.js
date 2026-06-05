@@ -1,24 +1,20 @@
 const { test: base, expect } = require('@playwright/test')
 
-const { LoginingPage } = require('../pages/LoginPage.js')
-const { Moviespage } = require('../pages/Moviespage.js')
-const { Toast } = require('../pages/Components.js')
-
-      //    login: new LoginingPage(page),
-     //     movies: new Moviespage(page),
-    //     toast: new Toast(page)
+const { Login } = require('../actions/Login.js')
+const { Movies } = require('../actions/Movies.js')
+const { Toast } = require('../actions/Components.js')
 
 const test = base.extend({
     page: async ({page}, use) => {
 
         const context = page
 
-        context['login'] = new LoginingPage(page) 
-        context['movies'] = new Moviespage(page) 
+        context['login'] = new Login(page) 
+        context['movies'] = new Movies(page) 
         context['toast'] = new Toast(page)     
 
         await use(context)
     }
 })
 
-export { test }
+module.exports = { test, expect }

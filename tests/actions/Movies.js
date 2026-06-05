@@ -7,18 +7,12 @@ import { test, expect } from '@playwright/test';
  * const html = await this.page.content();
  * console.log(html);
  */
-export class Moviespage {
+export class Movies {
     
      /** @param {import('@playwright/test').Page} page */
      constructor(page){
         this.page= page
     }
-
-      async isLoggedIn(){
-        //Espera os dados da tela carrega e em seguida verifica a url se possui admin
-        await this.page.waitForLoadState('networkidle')
-        await expect(this.page).toHaveURL(/.*admin/)
-      }
 
      async goForm(){
         // Seletor com reger o mesmo que a[href="/admin/movies/register"]

@@ -2,18 +2,18 @@
 import { expect, test } from '@playwright/test'
 const { faker } = require('@faker-js/faker');
 
-const { LandingPage } = require('../pages/LandingPage.js')
-const { Toast } = require('../pages/Components.js')
+const { Leads } = require('../actions/Leads.js')
+const { Toast } = require('../actions/Components.js')
 
 
-/** @type {import('../pages/LandingPage.js').LandingPage} */
+/** @type {import('../actions/Leads.js').Leads} */
 let landingPage
 
-/** @type {import('../pages/Components.js').Toast} */
+/** @type {import('../actions/Components.js').Toast} */
 let toast
 
 test.beforeEach(async ({ page }) => {
-  landingPage = new LandingPage(page)
+  landingPage = new Leads(page)
   toast = new Toast(page)
   await landingPage.visit()
   await landingPage.openLeadModel()

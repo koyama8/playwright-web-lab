@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-export class LoginingPage {
+export class Login {
   
     /** @param {import('@playwright/test').Page} page */
     constructor(page) {
@@ -31,5 +31,12 @@ export class LoginingPage {
     const alert = this.page.locator('.password-alert')
     await expect(alert).toHaveText(text)
   }
+
+  async isLoggedIn(){
+    //Espera os dados da tela carrega e em seguida verifica a url se possui admin
+    await this.page.waitForLoadState('networkidle')
+    await expect(this.page).toHaveURL(/.*admin/)
+      }
+
 
 }

@@ -1,25 +1,22 @@
 const { test } = require('@playwright/test')
 
-const { LoginingPage } = require('../pages/LoginPage.js')
-const  { Moviespage } = require('../pages/Moviespage.js')
-const { Toast } = require('../pages/Components.js')
+const { Login } = require('../actions/Login.js')
+const { Toast } = require('../actions/Components.js')
 
-/** @type {import('../pages/LoginPage.js').LoginingPage} */
+/** @type {import('../actions/Login.js').Login} */
 
 let loginingPage
 let toast
-let moviespage
 
 test.beforeEach(async ({ page }) => {
-  loginingPage = new LoginingPage(page)
+  loginingPage = new Login(page)
   toast = new Toast(page)
-  moviespage = new Moviespage(page)
   await loginingPage.visit()
 })
 
 test('deve logar com administrador', async () => {
    await loginingPage.submit('admin@zombieplus.com','pwd123')
-   await moviespage.isLoggedIn()
+   await loginingPage.isLoggedIn()
 })
 
 test('não deve logar com senha incorreta', async () => {
