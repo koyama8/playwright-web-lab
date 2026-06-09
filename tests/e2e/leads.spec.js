@@ -3,18 +3,18 @@ import { expect, test } from '@playwright/test'
 const { faker } = require('@faker-js/faker');
 
 const { Leads } = require('../support/actions/Leads.js')
-const { Toast } = require('../support/actions/Components.js')
+const { Popup } = require('../support/actions/Components.js')
 
 
 /** @type {import('../support/actions/Leads.js').Leads} */
 let landingPage
 
-/** @type {import('../support/actions/Components.js').Toast} */
-let toast
+/** @type {import('../support/actions/Components.js').Popup} */
+let popup
 
 test.beforeEach(async ({ page }) => {
   landingPage = new Leads(page)
-  toast = new Toast(page)
+  popup = new Popup(page)
   await landingPage.visit()
   await landingPage.openLeadModel()
 })
@@ -27,8 +27,8 @@ test('deve cadastrar um lead na fila de espera', async () => {
   await landingPage.openLeadModel()
   await landingPage.submitLeadForm(leadName, leadEmail)
 
-  const msg = 'Agradecemos por compartilhar seus dados conosco. Em breve, nossa equipe entrará em contato!'
-  await toast.toasHaveText(msg)
+  const msg = 'Agradecemos por compartilhar seus dados conosco. Em breve, nossa equipe entrará em contato.'
+  await popup.haveText(msg)
 })
 
 test('não deve cadastrar quando o email ja existe', async ({page, request}) => {
@@ -49,8 +49,8 @@ test('não deve cadastrar quando o email ja existe', async ({page, request}) => 
   await landingPage.submitLeadForm(leadName, leadEmail)
 
 
-  const msg = 'O endereço de e-mail fornecido já está registrado em nossa fila de espera.'
-  await toast.toasHaveText(msg)
+  const msg = 'Verificamos que o endereço de e-mail fornecido já consta em nossa lista de espera. Isso significa que você está um passo mais perto de aproveitar nossos serviços.'
+  await popup.haveText(msg)
 })
 
 

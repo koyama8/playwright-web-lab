@@ -1,16 +1,16 @@
 const { test } = require('@playwright/test')
 
 const { Login } = require('../support/actions/Login.js')
-const { Toast } = require('../support/actions/Components.js')
+const { Popup } = require('../support/actions/Components.js')
 
 /** @type {import('../support/actions/Login.js').Login} */
 
 let loginingPage
-let toast
+let popup
 
 test.beforeEach(async ({ page }) => {
   loginingPage = new Login(page)
-  toast = new Toast(page)
+  popup = new Popup(page)
   await loginingPage.visit()
 })
 
@@ -22,9 +22,9 @@ test('deve logar com administrador', async () => {
 test('não deve logar com senha incorreta', async () => {
    await loginingPage.submit('admin@zombieplus.com','pwd1234')
   
-   const msg = "Oops!Ocorreu um erro ao tentar efetuar o login. Por favor, verifique suas credenciais e tente novamente."
+   const msg = "Ocorreu um erro ao tentar efetuar o login. Por favor, verifique suas credenciais e tente novamente."
    
-   await toast.toasHaveText(msg)
+   await popup.haveText(msg)
     
 })
 

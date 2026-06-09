@@ -29,12 +29,12 @@ export class Login {
     await this.page.locator('//button[text()="Entrar"]').click()
   }
   async alertHaveText(text){
-    const alert = this.page.locator('span[class$=alert]')
+    const alert = this.page.locator('.alert')
     await expect(alert).toHaveText(text)
   }
 
   async alertHaveTextpassword(text){
-    const alert = this.page.locator('.password-alert')
+    const alert = this.page.locator('.alert')
     await expect(alert).toHaveText(text)
   }
 
